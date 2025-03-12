@@ -1,0 +1,17 @@
+{
+  "name": "moment1_dt211g",
+  "version": "1.0.0",
+  "author": "Annika Gadman",
+  "license": "ISC",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "description": "",
+  "devDependencies": {
+    "parcel": "^2.13.3",
+    "sharp": "^0.33.5"
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead" 
+}
