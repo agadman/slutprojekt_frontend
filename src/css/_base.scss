@@ -1,0 +1,6 @@
+@use 'variables';
+
+body { 
+    font-family: variables.$font-stack; 
+    text-align: center; 
+}
