@@ -16,8 +16,11 @@
 <body>
     <h1>Karta</h1>
     <input type="text" id="cityInput" placeholder="Ange stad">
-    <button onclick="searchCity()">Sök</button>
+    <input type="date" id="startDate">
+    <input type="date" id="endDate">
+    <button id="searchButton">Sök</button>
     <div id="map"></div>
-    <script src="script.js"></script>
+    <ul id="eventsList"></ul>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
