@@ -1,4 +1,4 @@
-const API_KEY = process.env.VITE_API_KEY; 
+const API_KEY = process.env.API_KEY; 
 
 var defaultLocation = [51.505, -0.09];
 var map = L.map('map');
