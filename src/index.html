@@ -16,17 +16,31 @@
 <body>
     <header>
         <section class="banner">
-            <h1>Find events near you or wherever you're headed!</h1>
+            <p>Find events near you or wherever you're headed!</p>
         </section>
-        <section class="hero"></section>
+        
     </header>
-    <h1>Karta</h1>
-    <input type="text" id="cityInput" placeholder="Ange stad">
-    <input type="date" id="startDate">
-    <input type="date" id="endDate">
-    <button id="searchButton">Sök</button>
-    <div id="map"></div>
-    <ul id="eventsList"></ul>
-    <script type="module" src="script.js"></script>
+    <main>
+        <section class="hero">
+            <div class="search-bar">
+                <input type="date" id="startDate">
+                <input type="date" id="endDate">
+                <input type="text" id="cityInput" class="search-input" placeholder="Search place...">
+            </div>
+            <button id="searchButton" class="search-button">FIND EVENT!</button>
+        </section>
+        <h1>VibeMap</h1>
+        <section class="layout">
+            <div class="map-container">
+                <h2>Events location</h2>
+                <div id="map"></div>
+            </div>
+            <div class="event-list">
+                <h2>Events</h2>
+                <ul id="eventsList"></ul>
+            </div>
+        </section>
+        <script type="module" src="script.js"></script>
+    </main>  
 </body>
 </html>

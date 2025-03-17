@@ -59,7 +59,11 @@ function updateEventsList(data) {
     let eventsList = document.getElementById('eventsList');
     eventsList.innerHTML = "";
 
-    data._embedded.events.forEach(event => {
+    let sortedEvents = data._embedded.events.sort((a, b) => 
+        new Date(a.dates.start.localDate) - new Date(b.dates.start.localDate)
+    );
+
+    sortedEvents.forEach(event => {
         let listItem = document.createElement('li');
         listItem.innerHTML = `<strong><a href="${event.url}" target="_blank">${event.name}</a></strong> - ${event.dates.start.localDate} <br> ${event._embedded.venues[0].name}`;
         eventsList.appendChild(listItem);
