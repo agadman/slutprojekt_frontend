@@ -84,7 +84,16 @@ function updateMapMarkers(data) {
     map.eachLayer(layer => { if (layer instanceof L.Marker) map.removeLayer(layer); });
 
     data._embedded.events.forEach(event => {
-        let venue = event._embedded.venues[0];
+        let venue = event._embedded?.venues?.[0];  
+
+        console.log("Event:", event);  
+        console.log("Venue:", venue);  
+
+        if (!venue || !venue.location) {
+            console.warn(`Ingen plats hittad för eventet: ${event.name}`);
+            return;  
+        }
+
         let lat = venue.location.latitude;
         let lon = venue.location.longitude;
 
