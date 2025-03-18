@@ -65,7 +65,17 @@ function updateEventsList(data) {
 
     sortedEvents.forEach(event => {
         let listItem = document.createElement('li');
-        listItem.innerHTML = `<strong><a href="${event.url}" target="_blank">${event.name}</a></strong> - ${event.dates.start.localDate} <br> ${event._embedded.venues[0].name}`;
+        let eventImage = event.images && event.images.length > 0 ? event.images[0].url : '';
+        listItem.innerHTML = `
+        <div class="event-item">
+            <img src="${eventImage}" alt="${event.name}" class="event-image">
+            <div class="event-info">
+                <strong><a href="${event.url}" target="_blank">${event.name}</a></strong>
+                <p>${event.dates.start.localDate} - ${event._embedded.venues[0].name}</p>
+            </div>
+        </div>
+    `;
+
         eventsList.appendChild(listItem);
     });
 }
@@ -98,6 +108,7 @@ function searchCity() {
         return;
     }
     fetchEvents(null, null, city);
+    document.querySelector('.layout').scrollIntoView({ behavior: 'smooth' });
 }
 
 getLocation();

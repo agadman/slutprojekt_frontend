@@ -1,13 +1,33 @@
+@use 'variables';
+
 .banner {
-  background-color: #181818;
+  background-color: variables.$dark-bg;
   padding: 1rem 2rem;
   text-align: center;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #00bcd4;
+  color: variables.$blue-color;
   position: relative;
   z-index: 10;
   box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.1); 
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.banner p {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: slideIn 3s ease-out infinite alternate;
 }
 
 .hero {
@@ -20,6 +40,60 @@
     text-align: center;
     color: #fff;
     padding: 2rem;
-  
   }
   
+  .search-bar {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  input {
+    padding: 12px 15px;
+    border-radius: 25px;
+    border: 1px solid #555;
+    outline: none;
+    font-size: 1rem;
+
+    color: #bbb;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  input::placeholder {
+    color: #bbb;
+  }
+  
+  input:focus {
+    border-color: #00bcd4;
+    box-shadow: 0px 0px 10px rgba(0, 188, 212, 0.5);
+  }
+  
+  .search-button {
+    background: #00bcd4;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .search-button:hover {
+    background: #008ba3;
+    transform: scale(1.05);
+  }
+  
+  .search-button:active {
+    transform: scale(0.95);
+  }
+  
+  @media (prefers-color-scheme: light) {
+    .banner {
+      background-color: variables.$light-bg;
+    }
+}

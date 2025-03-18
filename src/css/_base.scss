@@ -3,8 +3,8 @@
 body { 
     font-family: variables.$font-stack; 
     text-align: center; 
-    background: #181818;
-    color: #fff;
+    background: variables.$dark-bg;
+    color: variables.$dark-text;
 }
 
 h1 {
@@ -12,8 +12,8 @@ h1 {
 }
 
 button {
-    background: #00bcd4;
-    color: white;
+    background: variables.$blue-color;
+    color: variables.$dark-text;
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 5px;
@@ -22,7 +22,7 @@ button {
     transition: all 0.2s ease-in-out;
     
     &:hover {
-        background: #0097a7; 
+        background: variables.$blue-color-darker; 
         transform: scale(1.05); 
         box-shadow: 0 4px 10px rgba(0, 188, 212, 0.5); 
     }
@@ -31,5 +31,12 @@ button {
         background: #00838f; 
         transform: scale(0.95); 
         box-shadow: 0 2px 5px rgba(0, 188, 212, 0.5); 
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background: variables.$light-bg;
+        color: variables.$light-text;
     }
 }

@@ -1,4 +1,17 @@
 @import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap';
 
 $font-stack: Poppins, sans-serif;
- 
+$blue-color: #00bcd4;
+$blue-color-darker: #0097a7;
+
+// Light mode
+$light-bg: #f9f9f9;
+$light-text: #333;
+$light-layout-bg: #fff;
+$light-box-bg: #f1f1f1;
+
+// Dark mode
+$dark-bg: #181818;
+$dark-text: #fff; 
+$layout-bg-color: #222;
+$box-bg-color: #2d2d2d; 
