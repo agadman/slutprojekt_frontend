@@ -83,26 +83,45 @@ function updateEventsList(data) {
 function updateMapMarkers(data) {
     map.eachLayer(layer => { if (layer instanceof L.Marker) map.removeLayer(layer); });
 
-    data._embedded.events.forEach(event => {
-        let venue = event._embedded?.venues?.[0];  
+    let uniqueVenues = new Map(); 
 
-        console.log("Event:", event);  
-        console.log("Venue:", venue);  
+    data._embedded.events.forEach(event => {
+        let venue = event._embedded?.venues?.[0];
 
         if (!venue || !venue.location) {
             console.warn(`Ingen plats hittad för eventet: ${event.name}`);
-            return;  
+            return;
         }
 
-        let lat = venue.location.latitude;
-        let lon = venue.location.longitude;
+        let lat = parseFloat(venue.location.latitude);
+        let lon = parseFloat(venue.location.longitude);
+        let key = `${lat},${lon}`; 
 
-        L.marker([lat, lon]).addTo(map)
-            .bindPopup(`<strong>${event.name}</strong><br>${event.dates.start.localDate}<br>${venue.name}`);
+        if (!uniqueVenues.has(key)) {
+            uniqueVenues.set(key, { venueName: venue.name, lat, lon, events: [] });
+        }
+
+        uniqueVenues.get(key).events.push(event);
     });
 
-    let firstEvent = data._embedded.events[0]._embedded.venues[0].location;
-    map.setView([firstEvent.latitude, firstEvent.longitude], 12);
+    uniqueVenues.forEach(({ venueName, lat, lon, events }) => {
+        let eventList = events.map(event => 
+            `<p><strong><a href="${event.url}" target="_blank">${event.name}</a></strong><br>${event.dates.start.localDate}</p>`
+        ).join("");
+
+        let popupContent = `
+            <strong>${venueName}</strong><br>
+            <div class="popup-event-list">${eventList}</div>
+        `;
+
+        L.marker([lat, lon]).addTo(map)
+            .bindPopup(popupContent);
+    });
+
+    if (uniqueVenues.size > 0) {
+        let bounds = L.latLngBounds([...uniqueVenues.values()].map(v => [v.lat, v.lon]));
+        map.fitBounds(bounds, { padding: [50, 50] });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
