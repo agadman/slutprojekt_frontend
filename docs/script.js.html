@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: script.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: script.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * API-nyckel från .env
  * @constant {string}
  */
@@ -6,7 +34,7 @@ const API_KEY = process.env.API_KEY;
 
 /**
  * Standardplats om användarens position inte godkänns
- * @type {Array<number>}
+ * @type {Array&lt;number>}
  */
 var defaultLocation = [51.505, -0.09];
 
@@ -18,7 +46,7 @@ var map = L.map('map');
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution: '&amp;copy; &lt;a href="http://www.openstreetmap.org/copyright">OpenStreetMap&lt;/a>'
 }).addTo(map);
 
 /**
@@ -65,12 +93,12 @@ function setDefaultLocation() {
  * @param {number} lat  -- Latitude
  * @param {number} lon -- Longitude
  * @param {string} city -- Stad
- * @returns {Promise<void>} -- Returnerar en promise som hämtar och uppdaterar evenemang
+ * @returns {Promise&lt;void>} -- Returnerar en promise som hämtar och uppdaterar evenemang
  */
 async function fetchEvents(lat, lon, city = null) {
     let url = city 
-        ? `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${API_KEY}&city=${city}&size=10`
-        : `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${API_KEY}&latlong=${lat},${lon}&radius=50&size=10`;
+        ? `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${API_KEY}&amp;city=${city}&amp;size=10`
+        : `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${API_KEY}&amp;latlong=${lat},${lon}&amp;radius=50&amp;size=10`;
 
     try {
         let response = await fetch(url);
@@ -102,15 +130,15 @@ function updateEventsList(data) {
 
     sortedEvents.forEach(event => {
         let listItem = document.createElement('li');
-        let eventImage = event.images && event.images.length > 0 ? event.images[0].url : '';
+        let eventImage = event.images &amp;&amp; event.images.length > 0 ? event.images[0].url : '';
         listItem.innerHTML = `
-        <div class="event-item">
-            <img src="${eventImage}" alt="${event.name}" class="event-image">
-            <div class="event-info">
-                <strong><a href="${event.url}" target="_blank">${event.name}</a></strong>
-                <p>${event.dates.start.localDate} - ${event._embedded.venues[0].name}</p>
-            </div>
-        </div>
+        &lt;div class="event-item">
+            &lt;img src="${eventImage}" alt="${event.name}" class="event-image">
+            &lt;div class="event-info">
+                &lt;strong>&lt;a href="${event.url}" target="_blank">${event.name}&lt;/a>&lt;/strong>
+                &lt;p>${event.dates.start.localDate} - ${event._embedded.venues[0].name}&lt;/p>
+            &lt;/div>
+        &lt;/div>
     `;
 
         eventsList.appendChild(listItem);
@@ -147,12 +175,12 @@ function updateMapMarkers(data) {
 
     uniqueVenues.forEach(({ venueName, lat, lon, events }) => {
         let eventList = events.map(event => 
-            `<p><strong><a href="${event.url}" target="_blank">${event.name}</a></strong><br>${event.dates.start.localDate}</p>`
+            `&lt;p>&lt;strong>&lt;a href="${event.url}" target="_blank">${event.name}&lt;/a>&lt;/strong>&lt;br>${event.dates.start.localDate}&lt;/p>`
         ).join("");
 
         let popupContent = `
-            <strong>${venueName}</strong><br>
-            <div class="popup-event-list">${eventList}</div>
+            &lt;strong>${venueName}&lt;/strong>&lt;br>
+            &lt;div class="popup-event-list">${eventList}&lt;/div>
         `;
 
         L.marker([lat, lon]).addTo(map)
@@ -185,4 +213,26 @@ function searchCity() {
     fetchEvents(null, null, city);
     document.querySelector('.layout').scrollIntoView({ behavior: 'smooth' });
 }
-getLocation();
+getLocation();</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#API_KEY">API_KEY</a></li><li><a href="global.html#defaultLocation">defaultLocation</a></li><li><a href="global.html#fetchEvents">fetchEvents</a></li><li><a href="global.html#fetchEventsByLocation">fetchEventsByLocation</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#searchCity">searchCity</a></li><li><a href="global.html#setDefaultLocation">setDefaultLocation</a></li><li><a href="global.html#showError">showError</a></li><li><a href="global.html#updateEventsList">updateEventsList</a></li><li><a href="global.html#updateMapMarkers">updateMapMarkers</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Mar 19 2025 10:33:49 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
