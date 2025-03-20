@@ -101,20 +101,23 @@ function updateEventsList(data) {
     );
 
     sortedEvents.forEach(event => {
-        let listItem = document.createElement('li');
+        let venue = event._embedded?.venues?.[0];
+        let venueName = venue?.name || venue?.address?.line1 || "Plats ej tillgänglig";
         let eventImage = event.images && event.images.length > 0 ? event.images[0].url : '';
+    
+        let listItem = document.createElement('li');
         listItem.innerHTML = `
-        <div class="event-item">
-            <img src="${eventImage}" alt="${event.name}" class="event-image">
-            <div class="event-info">
-                <strong><a href="${event.url}" target="_blank">${event.name}</a></strong>
-                <p>${event.dates.start.localDate} - ${event._embedded.venues[0].name}</p>
-            </div>
-        </div>
-    `;
-
+            <article class="event-item">
+                <img src="${eventImage}" alt="${event.name}" class="event-image">
+                <div class="event-info">
+                    <h2><a href="${event.url}" target="_blank">${event.name}</a></h2>
+                    <p class="event-details">${event.dates.start.localDate} - ${venueName}</p>
+                </div>
+            </article>
+        `;
+    
         eventsList.appendChild(listItem);
-    });
+    });    
 }
 
 /**
@@ -150,8 +153,11 @@ function updateMapMarkers(data) {
             `<p><strong><a href="${event.url}" target="_blank">${event.name}</a></strong><br>${event.dates.start.localDate}</p>`
         ).join("");
 
+        let venue = events[0]._embedded?.venues?.[0];
+        let locationText = venueName || venue?.address?.line1 || "Plats ej tillgänglig";
+
         let popupContent = `
-            <strong>${venueName}</strong><br>
+            <strong>${locationText}</strong><br>
             <div class="popup-event-list">${eventList}</div>
         `;
 

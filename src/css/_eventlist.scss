@@ -1,10 +1,18 @@
+@use 'variables';
+
 ul { 
     list-style: none; 
     padding: 0; 
+
+    li { 
+        margin: 10px 0; 
+        padding: 10px; 
+        border: 1px solid #ccc; 
+    }
 }
 
-li { 
-    margin: 10px 0; 
-    padding: 10px; 
-    border: 1px solid #ccc; 
+@media (prefers-color-scheme: light) {
+    .event-details {
+        color: variables.$light-text !important;
+    }
 }
