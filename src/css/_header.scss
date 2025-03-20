@@ -31,18 +31,34 @@
 }
 
 .hero {
-    background: url('../images/hero.png') center/cover no-repeat;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
-    padding: 2rem;
-  }
+  position: relative;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  padding: 2rem;
+  overflow: hidden; 
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; 
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
   
-  .search-bar {
+.search-bar {
     display: flex;
     gap: 10px;
     justify-content: center;
@@ -50,7 +66,7 @@
     margin-bottom: 20px;
   }
   
-  input {
+input {
     padding: 12px 15px;
     border-radius: 25px;
     border: 1px solid #555;
@@ -61,16 +77,16 @@
     transition: all 0.3s ease-in-out;
   }
   
-  input::placeholder {
+input::placeholder {
     color: #bbb;
   }
   
-  input:focus {
+input:focus {
     border-color: #00bcd4;
     box-shadow: 0px 0px 10px rgba(0, 188, 212, 0.5);
   }
   
-  .search-button {
+.search-button {
     background: #00bcd4;
     color: #fff;
     border: none;
@@ -83,16 +99,16 @@
     transition: background 0.3s ease, transform 0.2s ease;
   }
   
-  .search-button:hover {
+.search-button:hover {
     background: #008ba3;
     transform: scale(1.05);
   }
   
-  .search-button:active {
+.search-button:active {
     transform: scale(0.95);
   }
   
-  @media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: light) {
     .banner {
       background-color: variables.$light-bg;
     }
